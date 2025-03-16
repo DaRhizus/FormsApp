@@ -1,0 +1,34 @@
+@model Product
+
+@{
+    ViewBag.Title = "Ürün Silme";
+}
+
+@{
+    var className = Model.IsActive == true ? "success" : "danger";
+}
+
+
+<h1 class="h4 text-center">Bu ürünü silmek istediğinizden emin misiniz?</h1>
+<form method="post" action="/Home/DeleteItem" class="text-center">
+    <input type="hidden" asp-for="@Model.Id">
+    <div class="card my-2">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <img src="~/img/@Model.Image" class="img-fluid" alt="">
+            </li>
+            <li class="list-group-item">İsim: @Model.Name</li>
+            <li class="list-group-item">Fiyat: @Model.Price</li>
+            <li class="list-group-item">Kategori: @ViewBag.Category</li>
+            <li class="list-group-item">
+                <span class="badge text-bg-@className">@(Model.IsActive == true ? "Aktif" : "Aktif Değil")</span>
+            </li>
+            <li class="list-group-item">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Cancel</a>
+            </li>
+        </ul>
+    </div>
+</form>
+
+
